@@ -1,6 +1,70 @@
 <?php
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
+$list_category = ["Входящие", "Учёба", "Работа", "Домашние дела", "Авто"];
+$num_items = count($list_category);
+$i = 0;
+$j=0;
+
+$business = [
+    [
+        'task' => 'Собеседование в IT компании',
+        'date' => '01.12.2019',
+        'category' => 'Работа',
+        'complite' => 0
+    ],
+    [
+        'task' => 'Выполнить тестовое задание',
+        'date' => '25.12.2019',
+        'category' => 'Работа',
+        'complite' => 0
+    ],
+    [
+        'task' => 'Сделать задание первого раздела',
+        'date' => '21.12.2019',
+        'category' => 'Учёба',
+        'complite' => 1
+    ],
+    [
+        'task' => 'Встреча с другом',
+        'date' => '22.12.2019',
+        'category' => 'Входящие',
+        'complite' => 0
+    ],
+    [
+        'task' => 'Купить корм для кота',
+        'date' => 'null',
+        'category' => 'Домашние дела',
+        'complite' => 0
+    ],
+    [
+        'task' => 'Заказать пиццу',
+        'date' => 'null',
+        'category' => 'Домашние дела',
+        'complite' => 0
+    ],
+];
+$num_items_business = count($business);
+
+function count_title($business, $title){
+    $i=0;
+    $count=0;
+    $num_items_business = count($business);
+
+    while ($i < $num_items_business){
+        $del = $business[$i];
+
+        if($del['category']===$title){
+            $count++;
+        }
+
+        $i++;
+    }
+
+    return $count;
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -42,10 +106,15 @@ $show_complete_tasks = rand(0, 1);
 
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
+                        <?php while ($i < $num_items): ?>
+
+
                         <li class="main-navigation__list-item">
-                            <a class="main-navigation__list-item-link" href="#">Название проекта</a>
-                            <span class="main-navigation__list-item-count">0</span>
+                            <a class="main-navigation__list-item-link" href="#"><?=$list_category[$i]; ?></a>
+                            <span class="main-navigation__list-item-count"><?=count_title($business, $list_category[$i])?></span>
                         </li>
+                        <?php $i++; ?>
+                        <?php endwhile; ?>
                     </ul>
                 </nav>
 
@@ -70,43 +139,42 @@ $show_complete_tasks = rand(0, 1);
                         <a href="/" class="tasks-switch__item">Просроченные</a>
                     </nav>
 
-                    <label class="checkbox">
+                    <label class="checkbox"  >
+
                         <!--добавить сюда атрибут "checked", если переменная $show_complete_tasks равна единице-->
-                        <input class="checkbox__input visually-hidden show_completed" type="checkbox" <? if($show_complete_tasks===1):?>checked<? endif; ?>>
+                        <input class="checkbox__input visually-hidden show_completed" type="checkbox" <?php if($show_complete_tasks===1):?>checked<?php endif; ?>>
                         <span class="checkbox__text">Показывать выполненные</span>
                     </label>
                 </div>
 
                 <table class="tasks">
-                    <tr class="tasks__item task">
+                    <?php while ($j < $num_items_business): ?>
+                        <?php $del = $business[$j]; ?>
+
+                    <?php if($del['complite']===1 && $show_complete_tasks===1): ?>
+                        <tr class="tasks__item task task--completed">
                         <td class="task__select">
                             <label class="checkbox task__checkbox">
-                                <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
-                                <span class="checkbox__text">Сделать главную страницу Дела в порядке</span>
+                                <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" checked>
+                                <span class="checkbox__text"><?=$del['task'];?></span>
                             </label>
                         </td>
-
-                        <td class="task__file">
-                            <a class="download-link" href="#">Home.psd</a>
-                        </td>
-
-                        <td class="task__date"></td>
-                    </tr>
-
-                    <? if($show_complete_tasks===1){
-                        echo "
-                    <tr class=\"tasks__item task task--completed\">
-                        <td class=\"task__select\">
-                            <label class=\"checkbox task__checkbox\">
-                                <input class=\"checkbox__input visually-hidden\" type=\"checkbox\" checked>
-                                <span class=\"checkbox__text\">Записаться на интенсив \"Базовый PHP\"</span>
-                            </label>
-                        </td>
-                        <td class=\"task__date\">10.10.2019</td>
-                        <td class=\"task__controls\"></td>
-                    </tr>";
-                    } ?>
-                    <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
+                            <td class="task__date"><?=$del['date']; ?></td>
+                        </tr>
+                    <?php elseif($del['complite']===1 && $show_complete_tasks===0):?>
+                        <?php else:?>
+                            <tr class="tasks__item task">
+                                <td class="task__select">
+                                    <label class="checkbox task__checkbox">
+                                        <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
+                                        <span class="checkbox__text"><?=$del['task'];?></span>
+                                    </label>
+                                </td>
+                                <td class="task__date"><?=$del['date']; ?></td>
+                            </tr>
+                    <?php endif?>
+                        <?php $j++; ?>
+                    <?php endwhile; ?>
                 </table>
             </main>
         </div>
