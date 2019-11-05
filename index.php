@@ -122,7 +122,7 @@ $num_items_business = count($business);
                     <label class="checkbox"  >
 
                         <!--добавить сюда атрибут "checked", если переменная $show_complete_tasks равна единице-->
-                        <input class="checkbox__input visually-hidden show_completed" type="checkbox" <? if($show_complete_tasks===1):?>checked<? endif; ?>>
+                        <input class="checkbox__input visually-hidden show_completed" type="checkbox" <?php if($show_complete_tasks===1):?>checked<?php endif; ?>>
                         <span class="checkbox__text">Показывать выполненные</span>
                     </label>
                 </div>
@@ -141,8 +141,8 @@ $num_items_business = count($business);
                         </td>
                             <td class="task__date"><?=$del['date']; ?></td>
                         </tr>
-                    <?elseif($del['complite']===1 && $show_complete_tasks===0):?>
-                        <?else:?>
+                    <?php elseif($del['complite']===1 && $show_complete_tasks===0):?>
+                        <?php else:?>
                             <tr class="tasks__item task">
                                 <td class="task__select">
                                     <label class="checkbox task__checkbox">
@@ -152,7 +152,7 @@ $num_items_business = count($business);
                                 </td>
                                 <td class="task__date"><?=$del['date']; ?></td>
                             </tr>
-                    <?endif?>
+                    <?php endif?>
                         <?php $j++; ?>
                     <?php endwhile; ?>
                 </table>
