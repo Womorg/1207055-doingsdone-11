@@ -6,6 +6,8 @@ $num_items = count($list_category);
 $i = 0;
 $j=0;
 
+//$main=34; just try for commit
+
 $business = [
     [
         'task' => 'Собеседование в IT компании',
