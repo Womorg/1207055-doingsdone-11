@@ -6,6 +6,7 @@ $num_items = count($list_category);
 $i = 0;
 $j=0;
 
+
 $business = [
     [
         'task' => 'Собеседование в IT компании',
@@ -22,7 +23,11 @@ $business = [
     [
         'task' => 'Сделать задание первого раздела',
         'date' => '21.12.2019',
+
         'category' => 'Учёба',
+
+        'category' => 'Учеба',
+
         'complite' => 1
     ],
     [
@@ -46,6 +51,7 @@ $business = [
 ];
 $num_items_business = count($business);
 
+
 function count_title($business, $title){
     $i=0;
     $count=0;
@@ -63,6 +69,8 @@ function count_title($business, $title){
 
     return $count;
 }
+
+
 
 
 ?>
@@ -109,9 +117,15 @@ function count_title($business, $title){
                         <?php while ($i < $num_items): ?>
 
 
+
                         <li class="main-navigation__list-item">
                             <a class="main-navigation__list-item-link" href="#"><?=$list_category[$i]; ?></a>
                             <span class="main-navigation__list-item-count"><?=count_title($business, $list_category[$i])?></span>
+
+                        <li class="main-navigation__list-item">
+                            <a class="main-navigation__list-item-link" href="#"><?=$list_category[$i]; ?></a>
+                            <span class="main-navigation__list-item-count">0</span>
+
                         </li>
                         <?php $i++; ?>
                         <?php endwhile; ?>
@@ -142,7 +156,15 @@ function count_title($business, $title){
                     <label class="checkbox"  >
 
                         <!--добавить сюда атрибут "checked", если переменная $show_complete_tasks равна единице-->
+
                         <input class="checkbox__input visually-hidden show_completed" type="checkbox" <?php if($show_complete_tasks===1):?>checked<?php endif; ?>>
+
+
+                        <input class="checkbox__input visually-hidden show_completed" type="checkbox" <?php if($show_complete_tasks===1):?>checked<?php endif; ?>>
+
+                        <input class="checkbox__input visually-hidden show_completed" type="checkbox" <? if($show_complete_tasks===1):?>checked<? endif; ?>>
+
+
                         <span class="checkbox__text">Показывать выполненные</span>
                     </label>
                 </div>
@@ -157,6 +179,7 @@ function count_title($business, $title){
                             <label class="checkbox task__checkbox">
                                 <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" checked>
                                 <span class="checkbox__text"><?=$del['task'];?></span>
+
                             </label>
                         </td>
                             <td class="task__date"><?=$del['date']; ?></td>
@@ -175,6 +198,51 @@ function count_title($business, $title){
                     <?php endif?>
                         <?php $j++; ?>
                     <?php endwhile; ?>
+
+                            </label>
+                        </td>
+
+                            <td class="task__date"><?=$del['date']; ?></td>
+                        </tr>
+                    <?php elseif($del['complite']===1 && $show_complete_tasks===0):?>
+                        <?php else:?>
+                            <tr class="tasks__item task">
+                                <td class="task__select">
+                                    <label class="checkbox task__checkbox">
+                                        <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
+                                        <span class="checkbox__text"><?=$del['task'];?></span>
+                                    </label>
+                                </td>
+                                <td class="task__date"><?=$del['date']; ?></td>
+                            </tr>
+                    <?php endif?>
+                        <?php $j++; ?>
+                    <?php endwhile; ?>
+
+
+                        <td class="task__file">
+                            <a class="download-link" href="#">Home.psd</a>
+                        </td>
+
+                        <td class="task__date"></td>
+                    </tr>
+
+                    <? if($show_complete_tasks===1){
+                        echo "
+                    <tr class=\"tasks__item task task--completed\">
+                        <td class=\"task__select\">
+                            <label class=\"checkbox task__checkbox\">
+                                <input class=\"checkbox__input visually-hidden\" type=\"checkbox\" checked>
+                                <span class=\"checkbox__text\">Записаться на интенсив \"Базовый PHP\"</span>
+                            </label>
+                        </td>
+                        <td class=\"task__date\">10.10.2019</td>
+                        <td class=\"task__controls\"></td>
+                    </tr>";
+                    } ?>
+                    <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
+
+
                 </table>
             </main>
         </div>
