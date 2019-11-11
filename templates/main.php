@@ -9,7 +9,7 @@
 
 
                 <li class="main-navigation__list-item">
-                    <a class="main-navigation__list-item-link" href="#"><?=$list_category[$i]; ?></a>
+                    <a class="main-navigation__list-item-link" href="#"><?=htmlspecialchars($list_category[$i]); ?></a>
                     <span class="main-navigation__list-item-count"><?=count_title($business, $list_category[$i])?></span>
                 </li>
                 <?php $i++; ?>
@@ -55,10 +55,10 @@
                     <td class="task__select">
                         <label class="checkbox task__checkbox">
                             <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" checked>
-                            <span class="checkbox__text"><?=$del['task'];?></span>
+                            <span class="checkbox__text"><?=htmlspecialchars($del['task']);?></span>
                         </label>
                     </td>
-                    <td class="task__date"><?=$del['date']; ?></td>
+                    <td class="task__date"><?=htmlspecialchars($del['date']); ?></td>
                 </tr>
             <?php elseif($del['complite']===1 && $show_complete_tasks===0):?>
             <?php else:?>
@@ -66,10 +66,10 @@
                     <td class="task__select">
                         <label class="checkbox task__checkbox">
                             <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
-                            <span class="checkbox__text"><?=$del['task'];?></span>
+                            <span class="checkbox__text"><?=htmlspecialchars($del['task']);?></span>
                         </label>
                     </td>
-                    <td class="task__date"><?=$del['date']; ?></td>
+                    <td class="task__date"><?=htmlspecialchars($del['date']); ?></td>
                 </tr>
             <?php endif?>
             <?php $j++; ?>
