@@ -61,6 +61,16 @@
                     <td class="task__date"><?=htmlspecialchars($del['date']); ?></td>
                 </tr>
             <?php elseif($del['complite']===1 && $show_complete_tasks===0):?>
+            <?php elseif (date('d-m-Y', time()) === date('d-m-Y', strtotime($del['date']))) : ?>
+                <tr class="tasks__item task task--important">
+                    <td class="task__select">
+                        <label class="checkbox task__checkbox">
+                            <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
+                            <span class="checkbox__text"><?=htmlspecialchars($del['task']);?></span>
+                        </label>
+                    </td>
+                    <td class="task__date"><?=htmlspecialchars($del['date']); ?></td>
+                </tr>
             <?php else:?>
                 <tr class="tasks__item task">
                     <td class="task__select">
