@@ -12,7 +12,10 @@
 <body>
 <h1 class="visually-hidden">Дела в порядке</h1>
 
-<h1><?=var_dump(date('d-m-Y', time()));?></h1>>
+
+
+
+
 
 <div class="page-wrapper">
     <div class="container container--with-sidebar">

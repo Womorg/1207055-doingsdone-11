@@ -6,6 +6,9 @@ require_once ('helpers.php');
 //ini_set('display_errors', 1);
 //ini_set('display_startup_errors', 1);
 
+
+
+
 $show_complete_tasks = rand(0, 1);
 $list_category = ["Входящие", "Учёба", "Работа", "Домашние дела", "Авто"];
 $num_items = count($list_category);
@@ -63,8 +66,15 @@ function count_title($business, $title){
     }
     return $count;
 }
+
 //
 $title="Заголовок страницы";
+
+
+
+$title="Заголовок страницы";
+ //$data=$layout_content;//
+
 
 $page_content = include_template('main.php', [
     'business' => $business,
@@ -76,9 +86,16 @@ $page_content = include_template('main.php', [
     'num_items_business'=> $num_items_business
 ]);
 
+
 $layout_content = include_template('layout.php', [
     'content' =>$page_content ,
     'title' => 'Дела в порядке',
+
+
+$layout_content = include_template('layout.php', [
+    'content' =>$page_content ,
+    'title' => 'Дела в порядке'
+
 ]);
 
 print($layout_content);
