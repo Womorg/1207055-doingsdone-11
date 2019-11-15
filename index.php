@@ -65,7 +65,7 @@ function count_title($business, $title){
 
 
 $title="Заголовок страницы";
- //$data=$layout_content;
+ //$data=$layout_content;//
 
 $page_content = include_template('main.php', [
     'business' => $business,
