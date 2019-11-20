@@ -142,3 +142,21 @@ function include_template($name, array $data = []) {
 
     return $result;
 }
+
+
+/**
+ * Считает количество категорий дел
+ * @param $business массив заданий
+ * @param $title название категории
+ * @return int вохвращает кол-во категорий
+ */
+function count_title($business, $title){
+    $index = 0;
+    foreach ($business as $task) {
+        if ($task['project_id'] === $title['id'])
+        {
+            $index++;
+        };
+    }
+    return $index;
+}
