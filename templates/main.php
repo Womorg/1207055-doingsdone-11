@@ -3,14 +3,14 @@
 <section class="content__side">
     <h2 class="content__side-heading">Проекты</h2>
 
+
     <nav class="main-navigation">
         <ul class="main-navigation__list">
             <?php while ($i < $num_items): ?>
-
-
+            <?php $del2 =$list_category[$i]?>
                 <li class="main-navigation__list-item">
-                    <a class="main-navigation__list-item-link" href="#"><?=htmlspecialchars($list_category[$i]); ?></a>
-                    <span class="main-navigation__list-item-count"><?=count_title($business, $list_category[$i])?></span>
+                    <a class="main-navigation__list-item-link" href="#"><?=htmlspecialchars($del2['name']); ?></a>
+                    <span class="main-navigation__list-item-count"><?=count_title($business, $del2)?></span>
                 </li>
                 <?php $i++; ?>
             <?php endwhile; ?>
@@ -47,39 +47,40 @@
     </div>
 
     <table class="tasks">
+
         <?php while ($j < $num_items_business): ?>
             <?php $del = $business[$j]; ?>
 
-            <?php if($del['complite']===1 && $show_complete_tasks===1): ?>
+            <?php if(($del['status']) && ($show_complete_tasks)): ?>
                 <tr class="tasks__item task task--completed">
                     <td class="task__select">
                         <label class="checkbox task__checkbox">
                             <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" checked>
-                            <span class="checkbox__text"><?=htmlspecialchars($del['task']);?></span>
+                            <span class="checkbox__text"><?=htmlspecialchars($del['title']);?></span>
                         </label>
                     </td>
-                    <td class="task__date"><?=htmlspecialchars($del['date']); ?></td>
+                    <td class="task__date"><?=htmlspecialchars($del['deadline']); ?></td>
                 </tr>
-            <?php elseif($del['complite']===1 && $show_complete_tasks===0):?>
-            <?php elseif (date('d-m-Y', time()) === date('d-m-Y', strtotime($del['date']))) : ?>
+            <?php elseif(($del['status']) && !($show_complete_tasks)):?>
+            <?php elseif (date('d-m-Y', time()) === date('d-m-Y', strtotime($del['deadline']))) : ?>
                 <tr class="tasks__item task task--important">
                     <td class="task__select">
                         <label class="checkbox task__checkbox">
                             <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
-                            <span class="checkbox__text"><?=htmlspecialchars($del['task']);?></span>
+                            <span class="checkbox__text"><?=htmlspecialchars($del['title']);?></span>
                         </label>
                     </td>
-                    <td class="task__date"><?=htmlspecialchars($del['date']); ?></td>
+                    <td class="task__date"><?=htmlspecialchars($del['deadline']); ?></td>
                 </tr>
             <?php else:?>
                 <tr class="tasks__item task">
                     <td class="task__select">
                         <label class="checkbox task__checkbox">
                             <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
-                            <span class="checkbox__text"><?=htmlspecialchars($del['task']);?></span>
+                            <span class="checkbox__text"><?=htmlspecialchars($del['title']);?></span>
                         </label>
                     </td>
-                    <td class="task__date"><?=htmlspecialchars($del['date']); ?></td>
+                    <td class="task__date"><?=htmlspecialchars($del['deadline']); ?></td>
                 </tr>
             <?php endif?>
             <?php $j++; ?>
