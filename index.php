@@ -10,7 +10,7 @@ if(!$con){
     print('Error'.mysqli_connect_error());
 }
 else{
-    $sql_tasks = 'SELECT t.title,t.project_id,t.user_id,t.status,t.task_crete FROM users u
+    $sql_tasks = 'SELECT t.title,t.project_id,t.user_id,t.status,t.task_crete, t.deadline FROM users u
                     INNER JOIN tasks t
                     ON u.id = t.user_id
                     WHERE u.id = 3;';
@@ -18,6 +18,7 @@ else{
                     WHERE user_id = 3;';
 
     $res_tasks = mysqli_query($con, $sql_tasks);
+    //var_dump($res_tasks);
     $res_categories = mysqli_query($con, $sql_projects);
 
     if($res_tasks === false && $res_categories === false){
