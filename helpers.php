@@ -160,3 +160,78 @@ function count_title($business, $title){
     }
     return $index;
 }
+
+function count_categories($tasks, $category) {
+    $index = 0;
+    foreach ($tasks as $task) {
+        if ($task['project_id'] === $category['id'])
+        {
+            $index++;
+        };
+    }
+    return $index;
+}
+
+/**
+ * Функция проверки на корректность выбора категории и вывода ошибки 404 в случае неудачи
+ * @param $list_category массив проектов
+ * @param $choosen_project id выбранного проекта на английском языке
+ */
+
+function check_response($list_category,$choosen_project){
+    $categories_id = array_column($list_category, 'id');
+    if ( $_GET['category']!='null' && !in_array($choosen_project, $categories_id)){
+        http_response_code(404);
+        die('error 404!');
+    }
+}
+
+/**
+ * Функция соотношения названия проекта и url в ссылке
+ * @param $list_category массив проектов, с которым будет вестись соотношение
+ * @param $business массив заданий
+ */
+function view_tasks($list_category,$business){
+    foreach ($list_category as $category) {
+        if(in_array($category['id'], $business)){
+            echo "is!";
+        }
+    }
+}
+
+function get_all_tasks(mysqli $con){
+    $sql_all_tasks = 'SELECT t.title,t.project_id,t.user_id,t.status,t.task_crete, t.deadline FROM users u
+                    INNER JOIN tasks t
+                    ON u.id = t.user_id
+                    WHERE u.id = 3;';
+    $res_all_tasks = mysqli_query($con, $sql_all_tasks);
+    return mysqli_fetch_all($res_all_tasks, MYSQLI_ASSOC);
+}
+
+function get_categories(mysqli $con){
+    $sql_categories = 'SELECT name,id,alias FROM projects
+                    WHERE user_id = 3;';
+    $res_categories = mysqli_query($con, $sql_categories);
+    return mysqli_fetch_all($res_categories, MYSQLI_ASSOC);
+}
+
+function get_tasks_by_categories(mysqli $con,$id_choosen_project){
+    if($id_choosen_project === -1){
+        $sql_tasks = 'SELECT t.title,t.project_id,t.user_id,t.status,t.task_crete FROM users u
+                INNER JOIN tasks t
+                ON u.id = t.user_id
+                WHERE u.id = 3;';
+        $res_tasks = mysqli_query($con , $sql_tasks);
+        return mysqli_fetch_all($res_tasks, MYSQLI_ASSOC);
+    }
+    else
+    {
+        $sql_tasks = 'SELECT t.title,t.project_id,t.user_id,t.status,t.task_crete FROM users u
+                INNER JOIN tasks t
+                ON u.id = t.user_id
+                WHERE u.id = 3
+                AND t.project_id = '.$id_choosen_project.';';
+        $res_tasks = mysqli_query($con , $sql_tasks);
+        return mysqli_fetch_all($res_tasks, MYSQLI_ASSOC);
+    }
+}

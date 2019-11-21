@@ -6,14 +6,13 @@
 
     <nav class="main-navigation">
         <ul class="main-navigation__list">
-            <?php while ($i < $num_items): ?>
-            <?php $del2 =$list_category[$i]?>
-                <li class="main-navigation__list-item">
-                    <a class="main-navigation__list-item-link" href="#"><?=htmlspecialchars($del2['name']); ?></a>
-                    <span class="main-navigation__list-item-count"><?=count_title($business, $del2)?></span>
+            <?php foreach ($list_category as $category) :?>
+                <!-- <li class="main-navigation__list-item main-navigation__list-item--active"> -->
+                <li class="main-navigation__list-item <?= ($choosen_project === $category['alias']) ? 'main-navigation__list-item--active' : ''?>">
+                    <a class="main-navigation__list-item-link" href="index.php?category=<?= $category['alias']; ?>"><?= $category['name']; ?> </a>
+                    <span class="main-navigation__list-item-count"><?= count_title($all_business, $category) ?></span>
                 </li>
-                <?php $i++; ?>
-            <?php endwhile; ?>
+            <?php endforeach;?>
         </ul>
     </nav>
 

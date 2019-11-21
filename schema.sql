@@ -17,7 +17,9 @@ CREATE TABLE projects(
 id INT AUTO_INCREMENT PRIMARY KEY,
 name CHAR(64) UNIQUE NOT NULL,
 user_id INT NOT NULL,
+alias CHAR(255),
 FOREIGN KEY (user_id) REFERENCES users(id)
+
 );
 
 CREATE TABLE tasks(
@@ -32,4 +34,8 @@ project_id INT NOT NULL,
 FOREIGN KEY (user_id) REFERENCES users(id),
 FOREIGN KEY (project_id) REFERENCES projects(id)
 );
+
+CREATE INDEX user ON users(id);
+CREATE INDEX project ON projects(id);
+CREATE INDEX task ON tasks(user_id);
 

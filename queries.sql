@@ -6,12 +6,12 @@ VALUES
 ('email2@example.com','Александр','1234'),
 ('email3@example.com','Алексей','12345');
 
-INSERT INTO projects (user_id,name) VALUES
-(1,'Входящие'),
-(3,'Учеба'),
-(1,'Работа'),
-(3,'Домашние дела'),
-(2,'Авто');
+INSERT INTO projects (user_id,name,alias) VALUES
+(1,'Входящие', 'incoming'),
+(3,'Учеба', 'study'),
+(1,'Работа', 'job'),
+(3,'Домашние дела', 'houseworks'),
+(2,'Авто', 'auto');
 
 INSERT INTO tasks (user_id,project_id,status,title, deadline)
 VALUES
