@@ -31,6 +31,7 @@ else $id_choosen_project = -1;
 //check_response($list_category,$choosen_project);
 //$tasks = get_tasks_by_categories($con,$id_choosen_project);
 $business = get_tasks_by_categories($con,$id_choosen_project);
+check_response($list_category,$choosen_project);
 
 if(!$con){
     print('Error'.mysqli_connect_error());
