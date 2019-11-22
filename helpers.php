@@ -217,7 +217,7 @@ function get_categories(mysqli $con){
 
 function get_tasks_by_categories(mysqli $con,$id_choosen_project){
     if($id_choosen_project === -1){
-        $sql_tasks = 'SELECT t.title,t.project_id,t.user_id,t.status,t.task_crete FROM users u
+        $sql_tasks = 'SELECT t.title,t.project_id,t.user_id,t.status,t.task_crete, t.deadline FROM users u
                 INNER JOIN tasks t
                 ON u.id = t.user_id
                 WHERE u.id = 3;';
@@ -235,3 +235,43 @@ function get_tasks_by_categories(mysqli $con,$id_choosen_project){
         return mysqli_fetch_all($res_tasks, MYSQLI_ASSOC);
     }
 }
+
+function add_task(mysqli $con, $list_category, $business){
+    if(isset($_FILES['file'])){
+        $file_uri = move_file_to_uploads();
+        $sql_add_task = 'INSERT INTO tasks (file) VALUES
+                                             ("'.$file_uri.'")';
+        $res_sql_add_task = mysqli_query($con, $sql_add_task);
+    }
+//    if(isset($_FILES['file'])){
+//        $file_name = $_FILES['file']['name'];
+//        $file_path = __DIR__ . '/uploads/';
+//        $file_url = '/uploads/' . $file_name;
+//        move_uploaded_file($_FILES['file']['tmp_name'], $file_path . $file_name);
+//        $sql_add_task = 'INSERT INTO tasks (file_name, file_url) VALUES
+//                                             ("'.$file_name.'","'.$file_url.'")';
+//        $res_sql_add_task = mysqli_query($con, $sql_add_task);
+//    }
+    if(!empty($_POST['name']) && !empty($_POST['project']) && (strtotime($_POST['date'])>=time())){
+        //echo 'add file if ok!';
+        $task_name = $_POST['name'];
+        $task_project = $_POST['project'];
+        $task_deadline=$_POST['date'];
+
+        $sql_add_task = 'INSERT INTO tasks (user_id,project_id,status,title,file, deadline) VALUES
+                                             (3,"'.$task_project.'",0,"'.$task_name.'","'.$file_uri.'","'.$task_deadline.'")';
+        $res_sql_add_task = mysqli_query($con, $sql_add_task);
+        if($res_sql_add_task === false){
+            die('Error while working with SQL request'.mysqli_error($con));
+        }
+        return 1;
+    }
+}
+
+function move_file_to_uploads(){
+    $file_name = $_FILES['file']['name'];
+    $file_path = __DIR__ . '/uploads/';
+    $file_url = '/uploads/' . $file_name;
+    move_uploaded_file($_FILES['file']['tmp_name'], $file_path.$file_name);
+    return $file_url;
+    }

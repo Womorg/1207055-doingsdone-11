@@ -28,14 +28,14 @@ task_crete TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
 status INT DEFAULT 0,
 title CHAR(255) NOT NULL,
 file VARCHAR (255),
-deadline TIMESTAMP,
+deadline TIMESTAMP NULL,
 user_id INT NOT NULL,
 project_id INT NOT NULL,
 FOREIGN KEY (user_id) REFERENCES users(id),
 FOREIGN KEY (project_id) REFERENCES projects(id)
 );
 
-CREATE INDEX user ON users(id);
-CREATE INDEX project ON projects(id);
-CREATE INDEX task ON tasks(user_id);
+CREATE INDEX users ON users(id);
+CREATE INDEX projects ON projects(id);
+CREATE INDEX tasks ON tasks(user_id);
 
