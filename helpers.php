@@ -179,7 +179,7 @@ function count_categories($tasks, $category) {
  */
 
 function check_response($list_category,$choosen_project){
-    $categories_id = array_column($list_category, 'id');
+    $categories_id = array_column($list_category, 'alias');
     if ( $_GET['category']!='null' && !in_array($choosen_project, $categories_id)){
         http_response_code(404);
         die('error 404!');
