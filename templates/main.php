@@ -30,6 +30,7 @@
         <?php while ($j < $num_items_business): ?>
             <?php $del = $business[$j]; ?>
 
+
             <?php if(($del['status']) && ($show_complete_tasks)): ?>
                 <tr class="tasks__item task task--completed">
                     <td class="task__select">
@@ -39,7 +40,7 @@
                         </label>
                     </td>
                     <?php if( strcmp('/uploads/', $del['file'])) : ?>
-                        <td class="task__file"><a href="#"><?=$del['file'] ?></a></td>
+                        <td class="task__file"><a href="#"></a></td>
                     <?php else : ?>
                         <td class="task__file"><a href="#"></a></td>
                     <?php endif; ?>
@@ -55,7 +56,7 @@
                         </label>
                     </td>
                     <?php if( strcmp('/uploads/', $del['file'])) : ?>
-                        <td class="task__file"><a href="#"><?= $del['file'] ?></a></td>
+                        <td class="task__file"><a href="#"></a></td>
                     <?php else : ?>
                         <td class="task__file"><a href="#"></a></td>
                     <?php endif; ?>
@@ -70,7 +71,7 @@
                         </label>
                     </td>
                     <?php if( strcmp('/uploads/', $del['file'])) : ?>
-                        <td class="task__file"><a href="#"><?= $del['file'] ?></a></td>
+                        <td class="task__file"><a href=""></a></td>
                     <?php else : ?>
                         <td class="task__file"><a href="#"></a></td>
                     <?php endif; ?>

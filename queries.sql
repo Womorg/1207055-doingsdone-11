@@ -13,7 +13,7 @@ INSERT INTO projects (user_id,name,alias) VALUES
 (3,'Домашние дела', 'houseworks'),
 (2,'Авто', 'auto');
 
-INSERT INTO tasks (user_id,project_id,status,title, deadline)
+INSERT INTO tasks (user_id,project_id,status,title, deadline )
 VALUES
 (1,3,0,'Собеседование в IT компании','2019-11-23 19:30:49' ),
 (2,3,0,'Выполнить тестовое задание', '2019-11-24 19:30:49'),
