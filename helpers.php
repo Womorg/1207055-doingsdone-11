@@ -152,8 +152,8 @@ function include_template($name, array $data = []) {
  */
 function count_title($business, $title){
     $index = 0;
-    foreach ($business as $task) {
-        if ($task['project_id'] === $title['id'])
+    foreach ($business as $taskes) {
+        if ($taskes['project_id'] === $title['id'])
         {
             $index++;
         };
@@ -200,7 +200,7 @@ function view_tasks($list_category,$business){
 }
 
 function get_all_tasks(mysqli $con){
-    $sql_all_tasks = 'SELECT t.title,t.project_id,t.user_id,t.status,t.task_crete, t.deadline FROM users u
+    $sql_all_tasks = 'SELECT t.title,t.project_id,t.user_id,t.status,t.task_crete, t.file, t.deadline  FROM users u
                     INNER JOIN tasks t
                     ON u.id = t.user_id
                     WHERE u.id = 3;';
@@ -217,7 +217,7 @@ function get_categories(mysqli $con){
 
 function get_tasks_by_categories(mysqli $con,$id_choosen_project){
     if($id_choosen_project === -1){
-        $sql_tasks = 'SELECT t.title,t.project_id,t.user_id,t.status,t.task_crete FROM users u
+        $sql_tasks = 'SELECT t.title,t.project_id,t.user_id,t.status,t.task_crete, t.file,t.deadline FROM users u
                 INNER JOIN tasks t
                 ON u.id = t.user_id
                 WHERE u.id = 3;';
@@ -226,7 +226,7 @@ function get_tasks_by_categories(mysqli $con,$id_choosen_project){
     }
     else
     {
-        $sql_tasks = 'SELECT t.title,t.project_id,t.user_id,t.status,t.task_crete FROM users u
+        $sql_tasks = 'SELECT t.title,t.project_id,t.user_id,t.status,t.task_crete, t.file, t.deadline FROM users u
                 INNER JOIN tasks t
                 ON u.id = t.user_id
                 WHERE u.id = 3
@@ -235,3 +235,18 @@ function get_tasks_by_categories(mysqli $con,$id_choosen_project){
         return mysqli_fetch_all($res_tasks, MYSQLI_ASSOC);
     }
 }
+
+
+
+function move_file_to_uploads(){
+    $file_name = $_FILES['file']['name'];
+    $file_path = __DIR__ . '/uploads/';
+    //$file_url = '/uploads/' . $file_name;
+    $file_url = $file_name;
+    move_uploaded_file($_FILES['file']['tmp_name'], $file_path.$file_name);
+    return $file_url;
+    }
+
+
+
+

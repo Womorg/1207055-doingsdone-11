@@ -1,26 +1,6 @@
 
 
-<section class="content__side">
-    <h2 class="content__side-heading">Проекты</h2>
 
-
-    <nav class="main-navigation">
-        <ul class="main-navigation__list">
-            <?php foreach ($list_category as $category) :?>
-                <!-- <li class="main-navigation__list-item main-navigation__list-item--active"> -->
-                <li class="main-navigation__list-item <?= ($choosen_project === $category['alias']) ? 'main-navigation__list-item--active' : ''?>">
-                    <a class="main-navigation__list-item-link" href="index.php?category=<?= $category['alias']; ?>"><?= $category['name']; ?> </a>
-                    <span class="main-navigation__list-item-count"><?= count_title($all_business, $category) ?></span>
-                </li>
-            <?php endforeach;?>
-        </ul>
-    </nav>
-
-    <a class="button button--transparent button--plus content__side-button"
-       href="pages/form-project.html" target="project_add">Добавить проект</a>
-</section>
-
-<main class="content__main">
     <h2 class="content__main-heading">Список задач</h2>
 
     <form class="search-form" action="index.php" method="post" autocomplete="off">
@@ -50,6 +30,7 @@
         <?php while ($j < $num_items_business): ?>
             <?php $del = $business[$j]; ?>
 
+
             <?php if(($del['status']) && ($show_complete_tasks)): ?>
                 <tr class="tasks__item task task--completed">
                     <td class="task__select">
@@ -58,6 +39,11 @@
                             <span class="checkbox__text"><?=htmlspecialchars($del['title']);?></span>
                         </label>
                     </td>
+                    <?php if( strcmp('/uploads/', $del['file'])) : ?>
+                        <td class="task__file"><a href="#"></a></td>
+                    <?php else : ?>
+                        <td class="task__file"><a href="#"></a></td>
+                    <?php endif; ?>
                     <td class="task__date"><?=htmlspecialchars($del['deadline']); ?></td>
                 </tr>
             <?php elseif(($del['status']) && !($show_complete_tasks)):?>
@@ -69,6 +55,11 @@
                             <span class="checkbox__text"><?=htmlspecialchars($del['title']);?></span>
                         </label>
                     </td>
+                    <?php if( strcmp('/uploads/', $del['file'])) : ?>
+                        <td class="task__file"><a href="#"></a></td>
+                    <?php else : ?>
+                        <td class="task__file"><a href="#"></a></td>
+                    <?php endif; ?>
                     <td class="task__date"><?=htmlspecialchars($del['deadline']); ?></td>
                 </tr>
             <?php else:?>
@@ -79,6 +70,11 @@
                             <span class="checkbox__text"><?=htmlspecialchars($del['title']);?></span>
                         </label>
                     </td>
+                    <?php if( strcmp('/uploads/', $del['file'])) : ?>
+                        <td class="task__file"><a href=""></a></td>
+                    <?php else : ?>
+                        <td class="task__file"><a href="#"></a></td>
+                    <?php endif; ?>
                     <td class="task__date"><?=htmlspecialchars($del['deadline']); ?></td>
                 </tr>
             <?php endif?>
