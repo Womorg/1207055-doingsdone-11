@@ -40,7 +40,7 @@
                         </label>
                     </td>
                     <?php if( strcmp('/uploads/', $del['file'])) : ?>
-                        <td class="task__file"><a href="#"></a></td>
+                        <td class="task__file"><a href="http://dela/uploads/<?=$del['file']?>"><?=$del['file']?></a></td>
                     <?php else : ?>
                         <td class="task__file"><a href="#"></a></td>
                     <?php endif; ?>
@@ -56,7 +56,7 @@
                         </label>
                     </td>
                     <?php if( strcmp('/uploads/', $del['file'])) : ?>
-                        <td class="task__file"><a href="#"></a></td>
+                        <td class="task__file"><a href="http://dela/uploads/<?=$del['file']?>"><?=$del['file']?></a></td>
                     <?php else : ?>
                         <td class="task__file"><a href="#"></a></td>
                     <?php endif; ?>
@@ -71,7 +71,7 @@
                         </label>
                     </td>
                     <?php if( strcmp('/uploads/', $del['file'])) : ?>
-                        <td class="task__file"><a href=""></a></td>
+                        <td class="task__file"><a href="http://dela/uploads/<?=$del['file']?>"><?=$del['file']?></a></td>
                     <?php else : ?>
                         <td class="task__file"><a href="#"></a></td>
                     <?php endif; ?>

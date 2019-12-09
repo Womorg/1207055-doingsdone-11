@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
     <meta charset="UTF-8">
-    <title><?= $title ;?></title>
+    <title><?= $title; ?></title>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/flatpickr.min.css">
@@ -11,13 +10,10 @@
 
 <body>
 <h1 class="visually-hidden">Дела в порядке</h1>
-
-
-
 <div class="page-wrapper">
     <div class="container container--with-sidebar">
         <header class="main-header">
-            <a href="/">
+            <a href="/index.php">
                 <img src="img/logo.png" width="153" height="42" alt="Логотип Дела в порядке">
             </a>
 
@@ -26,9 +22,8 @@
 
                 <div class="main-header__side-item user-menu">
                     <div class="user-menu__data">
-                        <p>Константин</p>
-
-                        <a href="#">Выйти</a>
+                        <p><?= $_SESSION['name'] ?></p>
+                        <a href="index.php?exit=true">Выйти</a>
                     </div>
                 </div>
             </div>
@@ -38,26 +33,31 @@
             <section class="content__side">
                 <h2 class="content__side-heading">Проекты</h2>
 
-
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
-                        <?php foreach ($list_category as $category) :?>
-                            <!-- <li class="main-navigation__list-item main-navigation__list-item--active"> -->
-                            <li class="main-navigation__list-item <?= ($choosen_project === $category['alias']) ? 'main-navigation__list-item--active' : ''?>">
-                                <a class="main-navigation__list-item-link" href="index.php?category=<?= $category['alias']; ?>"><?= $category['name']; ?> </a>
-                                <span class="main-navigation__list-item-count"><?= count_title($all_business, $category) ?></span>
-                            </li>
-                        <?php endforeach;?>
+                        <?php
+                            if (is_array($categories)) :
+                                foreach ($categories as $category) : ?>
+                        <!-- <li class="main-navigation__list-item main-navigation__list-item--active"> -->
+                        <li class="main-navigation__list-item <?= ($choosen_project === $category['id']) ? 'main-navigation__list-item--active' : ''?>">
+                            <a class="main-navigation__list-item-link" href="index.php?category=<?= $category['id']; ?>">
+                                <?= $category['name']; ?>
+                            </a>
+                            <span class="main-navigation__list-item-count"><?= count_categories($tasks_full, $category) ?></span>
+                        </li>
+                        <?php
+                            endforeach;
+                            endif;
+                        ?>
                     </ul>
                 </nav>
 
                 <a class="button button--transparent button--plus content__side-button"
-                   href="pages/form-project.html" target="project_add">Добавить проект</a>
+                   href="add_project.php" target="project_add">Добавить проект</a>
             </section>
 
-            <main class="content__main"><?=$content?></main>>
+            <main class="content__main"><?= $content; ?></main>
         </div>
-
     </div>
 </div>
 
@@ -69,6 +69,7 @@
             <p>Веб-приложение для удобного ведения списка дел.</p>
         </div>
 
+        <!-- <a class="main-footer__button button button--plus" href="pages/form-task.html">Добавить задачу</a> -->
         <a class="main-footer__button button button--plus" href="add.php">Добавить задачу</a>
 
         <div class="main-footer__social social">
