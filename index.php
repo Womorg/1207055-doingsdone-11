@@ -1,7 +1,7 @@
 <?php
 require_once('assembling.php');
 session_start();
-//проверка для мёрджа
+//проверка для мёрджа модуля 8.1
 $categories = get_categories($con);
 $users = get_users($con);
 if (isset($_GET['show_completed'])) {
